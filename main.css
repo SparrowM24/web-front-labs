@@ -27,5 +27,32 @@ footer {
     font-size: 24px
 }
 a {
-    text-decoration: none; 
+    color: #fefae0;
+    text-decoration: none;
+    background-color: #283618;
+    transition: 0.5s 2s;
+}
+a:link {
+    color: #b0c4b1;
+    text-decoration: none;
+    background-color: #4a5759;
+}
+
+a:visited {
+    color: #b0c4b1;
+    text-decoration: none;
+    background-color: #dedbd2;
+}
+
+a:hover {
+    color: #fefae0;
+    text-decoration: underline;
+    background-color: #606c38;
+    box-shadow: 5px 5px 5px #023047;
+    transition: 0.3s;
+}
+a:active {
+    color: rgba(0, 0, 0);
+    opacity: 0.3;
+
 }
