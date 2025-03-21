@@ -29,11 +29,11 @@ footer {
 a {
     color: #fefae0;
     text-decoration: none;
-    background-color: #283618;
+    background-color: #0077b6;
     transition: 0.5s 2s;
 }
 a:link {
-    color: #b0c4b1;
+    color: #457b9d;
     text-decoration: none;
     background-color: #4a5759;
 }
@@ -41,7 +41,7 @@ a:link {
 a:visited {
     color: #b0c4b1;
     text-decoration: none;
-    background-color: #dedbd2;
+    background-color: #778da9;
 }
 
 a:hover {
@@ -54,5 +54,15 @@ a:hover {
 a:active {
     color: rgba(0, 0, 0);
     opacity: 0.3;
-
+}
+div.menu {
+    border: 7px solid rgb(6, 48, 4, 0.8);
+    border-radius: 5px;
+    width: 350px;
+    margin: 0 auto;
+    background-color: #e9edc9;
+}
+div.menu:hover {
+    background-color: #ffffff30;
+    box-shadow: 0 0 15px #000000;
 }
