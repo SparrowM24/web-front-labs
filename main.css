@@ -1,12 +1,12 @@
 body {
-    background-color: rgb(255, 255, 255); 
-    color: rgb(30, 36, 50); 
+    background-color: #f1faee; 
+    color:#1d3557; 
     font-family: Arial;
     margin: 0px; 
 }
 header {
-    background-color: rgb(100, 150, 200);
-    color: white;
+    background-color: #457b9d;
+    color:  #f1faee;
     padding: 20px;
     text-align: center;
     font-size: 24px
@@ -14,14 +14,14 @@ header {
 
 main {
     font-size: 24px;
-    background-color: rgb(255, 255, 255);
+    background-color: #f1faee;
     padding: 20px;
     margin: 10px 20px 45px;
 }
 
 footer {
-    background-color: rgb(100, 150, 200);
-    color: white;
+    background-color:  #457b9d;
+    color:  #f1faee;
     padding: 10px;
     text-align: center;
     /* width: 100%; */
@@ -32,42 +32,48 @@ footer {
     left: 0;
 }
 a {
-    color: #fefae0;
+    color: #f1faee;
+    padding: 6px;
+    margin: 30px 0;
     text-decoration: none;
-    background-color: #0077b6;
-    transition: 0.5s 2s;
+    transition: 0.5s;
+    background-color: #e63946;
+    border-radius: 10px;
+}
+li {
+    padding: 6px;
+    margin: 8px 0;
 }
 a:link {
-    color: #457b9d;
+    color: #f1faee;
     text-decoration: none;
-    background-color: #4a5759;
 }
 
 a:visited {
-    color: #b0c4b1;
+    color: #f4a261;
     text-decoration: none;
-    background-color: #778da9;
+    background-color: #e76f51;
 }
 
 a:hover {
-    color: #fefae0;
+    color: #c1121f;
     text-decoration: underline;
-    background-color: #606c38;
+    background-color: #780000;
     box-shadow: 5px 5px 5px #023047;
-    transition: 0.3s;
 }
 a:active {
-    color: rgba(0, 0, 0);
-    opacity: 0.3;
+    opacity: 0.5;
 }
 div.menu {
-    border: 7px solid rgb(6, 48, 4, 0.8);
+    border: 7px solid #669bbc;
     border-radius: 5px;
-    width: 350px;
+    width: 30%;
+    height: auto;
     margin: 0 auto;
-    background-color: #e9edc9;
+    background-color: #a8dadc;
 }
 div.menu:hover {
-    background-color: #ffffff30;
-    box-shadow: 0 0 15px #000000;
+    background-color: #81c3d7;
+    border: 7px solid #3a7ca5;
+    box-shadow: 0px 0px 5px 5px #16425b;
 }
