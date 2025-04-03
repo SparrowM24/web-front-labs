@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="..\main.css">
+    <link rel="icon" href="favicon-32x32.png" type="image/x-icon">
+    <link rel="icon" href="favicon-16x16.png" type="image/x-icon">
+    <style>
+        div {
+            font-family: Arial, sans-serif;
+            margin: 10px 0 10px 30px;
+            width: auto;
+            height: auto;
+        }
+
+        .bird-block {
+            background-color: #a8dadc;
+            color: #1d3557;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px #14213d;
+            align-items: center;
+            width: 45%;
+            height: 50px;
+            padding:  5px;
+            display: inline-block;
+            vertical-align: top;
+            text-align: justify;
+            position: relative;
+            transition: 1.5s 1.5s;
+        }
+
+        .bird-block:hover {
+            background-color: #184e77;
+            color: #f1faee;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px #14213d;
+            padding: 0px;
+            height: 200px;
+            cursor: pointer;
+            transition: 0.5s;
+            overflow: auto;
+        }
+
+        .bird-title {
+            position: relative;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-left: auto; 
+            margin-right: auto; 
+            width: auto;
+        }
+
+        .bird-text {
+            opacity: 0;
+            position: absolute;
+            margin-left: auto; 
+            margin-right: auto; 
+            width: auto;
+            padding: 20px 10px;
+            transition: 0.5s 1.5s;
+        }
+
+        .bird-block:hover .bird-text {
+            opacity: 1;
+            transition: opacity 1s;
+            margin-left: auto; 
+            margin-right: auto; 
+            width: auto;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <header>
+        НГТУБ ФБ, Лабораторная работа 3
+    </header>
+
+    <main>
+        <div class="bird-block">
+            <div class="bird-title">Воробей</div>
+            <div class="bird-text">
+                Воробей — маленькая, но энергичная птица, знакомая каждому горожанину. Эти пернатые 
+                обитают практически повсеместно, приспосабливаются к любым условиям жизни. Их характерная 
+                черта — подвижность: воробьи постоянно находятся в движении, прыгают, копошатся в траве или 
+                ищут корм. Птицы живут стайками, защищая свою территорию от конкурентов. Несмотря на скромный 
+                внешний вид (серо-коричневое оперение), воробьи играют важную роль в экосистеме городов, уничтожая 
+                насекомых и семена сорняков.
+            </div>
+
+        </div>
+
+        <div class="bird-block">
+            <div class="bird-title">Голубь</div>
+            <div class="bird-text">
+                Голуби — символ мира и спокойствия, часто встречающиеся в парках и на площадях. Эти птицы обладают 
+                серым или сизым оперением с металлическим блеском на шее. Они легко адаптируются к городской среде, 
+                питаются зернами, семенами и остатками пищи человека. Голуби известны своей моногамностью: пары 
+                остаются вместе на протяжении всей жизни. Летают эти птицы быстро и маневренно, часто собираясь 
+                в большие стаи. Голоса голубей — мягкое воркование — стали неотъемлемой частью городского ландшафта.
+            </div>
+
+        </div>
+
+        <div class="bird-block">
+            <div class="bird-title">Сорока</div>
+            <div class="bird-text">
+                Сороки — умные и любопытные птицы с черно-белым оперением. Их отличительная черта — длинный хвост, 
+                который делает их легко узнаваемыми. Сороки всеядны: они едят насекомых, мелких животных, ягоды и 
+                даже пищевые отходы. Эти птицы известны своим интересом к блестящим предметам, которые они иногда 
+                крадут. Сороки строят гнезда на деревьях, часто вблизи человеческого жилья. Их голоса разнообразны: 
+                от щелканья до резких криков. Сороки считаются символом хитрости и смекалки.
+            </div>
+            
+        </div>
+
+        <div class="bird-block">
+            <div class="bird-title">Грач</div>
+            <div class="bird-text">
+                Грачи — крупные черные птицы, близкие родственники ворон. Они отличаются стройным телосложением и 
+                длинным клювом. Грачи обитают в лесах, полях и пригородах, часто собираются в большие стаи. 
+                Питаются насекомыми, червями, ягодами и зернами. Весной грачи возвращаются из теплых краев, 
+                знаменуя собой приход весны. Их голос — громкий каркающий звук — хорошо узнаваем. Грачи строят 
+                массивные гнезда на высоких деревьях, предпочитая жить колониями.
+            </div>
+            
+        </div>
+    </main>
+
+    <footer>
+        &copy; Дьячкова Алиса, ФБИ-32, 2 курс, 2025
+    </footer>
+
+</body>
+</html>
