@@ -17,22 +17,10 @@
             margin: 0;
             background-color: #f0f0f0; /* Цвет фона */
         }
-
-        .progress-container {
-            width: 300px; /* Фиксированная ширина панели прогресса */
-            background-color: #e0e0e0; /* Цвет фона панели прогресса */
-            border-radius: 5px; /* Закругленные углы */
-            overflow: hidden; /* Скрытие переполнения */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Слабая тень */
+        header {
+            position: fixed;
+            top: 0;
         }
-
-        .progress-bar {
-            height: 20px; /* Высота панели прогресса */
-            width: 0; /* Начальная ширина 0 */
-            background-color: #4CAF50; /* Цвет прогресса */
-            transition: width 0.1s; /* Плавный переход */
-        }
-
         .button {
             margin-top: 20px; /* Отступ сверху */
             padding: 10px 20px; /* Отступы внутри кнопки */
@@ -53,6 +41,16 @@
         .button:active {
             box-shadow: none; /* Убираем тень при нажатии */
         }
+        .progress-container {
+            width: 100%;
+        }
+        progress {
+            value
+        }
+        .button:active ~ progress {
+            initial-value: 0;
+            transform: value 100% 45s;
+        }
     </style>
 </head>
 <body>
@@ -62,41 +60,10 @@
 
     <main>
         <div class="progress-container">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-        <button class="button" id="holdButton">Нажмите и удерживайте</button>
-    
-        <script>
-            const holdButton = document.getElementById('holdButton');
-            const progressBar = document.getElementById('progressBar');
-            let progressInterval;
-            let progress = 0;
-    
-            holdButton.addEventListener('mousedown', () => {
-                holdButton.style.boxShadow = 'none'; // Убираем тень при нажатии
-                progress = 0; // Сбрасываем прогресс
-                progressBar.style.width = '0%'; // Сбрасываем ширину панели прогресса
-    
-                progressInterval = setInterval(() => {
-                    if (progress < 100) {
-                        progress += 2; // Увеличиваем прогресс
-                        progressBar.style.width = progress + '%'; // Обновляем ширину панели прогресса
-                    } else {
-                        clearInterval(progressInterval); // Останавливаем интервал, когда прогресс достиг 100%
-                    }
-                }, 100); // Увеличиваем прогресс каждые 100 мс
-            });
-    
-            holdButton.addEventListener('mouseup', () => {
-                clearInterval(progressInterval); // Останавливаем интервал при отпускании кнопки
-                holdButton.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)'; // Восстанавливаем тень
-            });
-    
-            holdButton.addEventListener('mouseleave', () => {
-                clearInterval(progressInterval); // Останавливаем интервал, если мышь покинула кнопку
-                holdButton.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)'; // Восстанавливаем тень
-            });
-        </script>
+            <button class="button" id="holdButton">Нажмите и удерживайте</button>
+            <progress id="file" max="100" value="30"></progress>
+        </div> 
+        
     </main>
 
     <footer>

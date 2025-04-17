@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Отслеживание состояния кнопки</title>
+    <style>
+        .progress-container {
+            width: 100%;
+            background: #ff0000;
+        }
+        .progress-value {
+
+            height: 20px;
+            background: #76b852;
+            
+        }
+        .progress-value:hover {
+            cursor: pointer;
+            width: 0;
+            max-width: 100%;
+            transition: width 5s; /* Плавное изменение ширины */
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-value"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Дьячкова Алиса Дмитриевна. Лабораторная 4</title>
+    <link rel="stylesheet" href="..\main.css">
+    <link rel="icon" href="..\lab3\favicon-32x32.png" type="image/x-icon">
+    <link rel="icon" href="..\lab3\favicon-16x16.png" type="image/x-icon">
+    <style>
+        footer, header {
+            z-index: 100;
+        }
+        div {
+            width: 300px;
+            height: 70px;
+            line-height: 70px;
+            text-align: center;
+            background-color: white;
+            border: 1px dotted darkgreen;
+            margin: 15px;
+            z-index: 5;
+            position: relative;
+        }
+    
+        .postion-relative {
+            position: relative;
+            right: -200px;
+            top: -130px;
+            z-index: 0;
+        }
+
+        .postion-relative:hover {
+            z-index: 10;
+        }
+        .position-absolute{
+            position: absolute;
+            left: 300px;
+            z-index: 1;
+            cursor: pointer;
+        }
+        .position-absolute:hover {
+            transform: scale(1.3); 
+            background-color: lightblue; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУБ ФБ, Лабораторная работа 4
+    </header>
+
+    <main>
+        <div>static</div>
+        <div>static</div>
+        <div class="postion-relative">relative</div>
+        <div>static</div>
+        <div>static</div>
+        <div class="position-absolute">absolute</div>
+        <div>static</div>
+        <div>static</div>
+        <div>static</div>
+        <div>static</div>
+    </main>
+
+    <footer>
+        &copy; Дьячкова Алиса, ФБИ-32, 2 курс, 2025
+    </footer>
+</body>
+</html>
