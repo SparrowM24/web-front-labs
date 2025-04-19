@@ -1,73 +1,86 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Дьячкова Алиса Дмитриевна. Лабораторная 4</title>
-    <link rel="stylesheet" href="..\main.css">
-    <link rel="icon" href="lab3\favicon-32x32.png" type="image/x-icon">
-    <link rel="icon" href="lab3\favicon-16x16.png" type="image/x-icon">
-    <style>
-        body {
-            display: flex;
-            justify-content: center; /* Центрирование по горизонтали */
-            align-items: center; /* Центрирование по вертикали */
-            height: 100vh; /* Высота на весь экран */
-            margin: 0;
-            background-color: #f0f0f0; /* Цвет фона */
-        }
-        header {
-            position: fixed;
-            top: 0;
-        }
-        .button {
-            margin-top: 20px; /* Отступ сверху */
-            padding: 10px 20px; /* Отступы внутри кнопки */
-            font-size: 16px; /* Размер шрифта */
-            color: white; /* Цвет текста */
-            background-color: #007BFF; /* Цвет фона кнопки */
-            border: none; /* Убираем границу */
-            border-radius: 5px; /* Закругленные углы */
-            cursor: pointer; /* Курсор в виде указателя */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Слабая тень */
-            transition: box-shadow 0.2s; /* Плавный переход для тени */
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Дьячкова Алиса Дмитриевна. Лабораторная 4</title>
+        <link rel="stylesheet" href="..\main.css">
+        <link rel="icon" href="..\lab3\favicon-32x32.png" type="image/x-icon">
+        <link rel="icon" href="..\lab3\favicon-16x16.png" type="image/x-icon">
+        <style>
+             
+            .h {   
+                width: 400px;
+                height: 250px;
+                text-align: center;
+                background-color: #8ecae6; 
+                margin: auto;
+                padding: 15px 0px 0px 0px;
+                box-shadow: 0px 0px 5px #023047;
+            }
+            h1 {
+                font-size: 25pt;
+                margin-top: 20px;
+            }
+            .u {
+                border: 4px solid #2d2525;
+                width: 300px;
+                height:30px;
+                background: #fefae0;
+                position: relative; 
+                top: -15%;
+                margin: auto;
+            }
+            .b{
+                height: 100%;
+                width: 0;
+                background: #36448c;
+                transition: width 5s ease-out;
+            }
+            button {
+                color: #8ecae6;
+                border-radius: 15px;
+                background-color: #162562;
+                box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2); 
+                padding: 10px 20px;
+                margin: 0px 10px;
+                border: none;
+                transition:  0.3s;
+                position: relative; 
+                top: 30%;
+                cursor: pointer;
+                z-index: 1;
+                font-size: 20px;
+                font-weight: bold;
+            }
+            button:hover {
+                box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4); 
+            }
+            button:active {
+                box-shadow: none; 
+            }
+            button:active + .u .b  {
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            НГТУ, ФБ, Лабораторная работа 4
+        </header>
+        <main>
+           <div class="h">
+                <h1>Степень прогресса</h1>
+                <button> Нажмите и удерживайте</button>
+                <div class="u">
+                    <div class="b"></div>
+                </div>
+           </div>
+        </main>
 
-        .button:hover {
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Более выраженная тень при наведении */
-        }
-
-        .button:active {
-            box-shadow: none; /* Убираем тень при нажатии */
-        }
-        .progress-container {
-            width: 100%;
-        }
-        progress {
-            value
-        }
-        .button:active ~ progress {
-            initial-value: 0;
-            transform: value 100% 45s;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        НГТУБ ФБ, Лабораторная работа 4
-    </header>
-
-    <main>
-        <div class="progress-container">
-            <button class="button" id="holdButton">Нажмите и удерживайте</button>
-            <progress id="file" max="100" value="30"></progress>
-        </div> 
-        
-    </main>
-
-    <footer>
-        &copy; Дьячкова Алиса, ФБИ-32, 2 курс, 2025
-    </footer>
-</body>
+        <footer>
+            &copy; Дьячкова Алиса, ФБИ-32, 2 курс, 2025
+        </footer>
+    </body>
 </html>
