@@ -12,16 +12,30 @@
         function showSum() {
             let inputA = document.getElementById('numberA');
             let inputB = document.getElementById('numberB');
-
             let a = parseInt(inputA.value);
             let b = parseInt(inputB.value);
             let result = a + b;
             alert('Сумма ' + a + ' и ' + b + ' равна ' + result);
         }
+
+        function minus() {
+            let a = parseInt(document.getElementById('numberA').value);
+            let b = parseInt(document.getElementById('numberB').value);
+            let result = a - b;
+            alert('Разность ' + a + ' и ' + b + ' равна ' + result);
+        }
+
+        function mult() {
+            let a = parseInt(document.getElementById('numberA').value);
+            let b = parseInt(document.getElementById('numberB').value);
+            let result = a * b;
+            alert('Произведение ' + a + ' и ' + b + ' равно ' + result);
+        }
         function showAuthor() {
             let author = "Автор страницы:\nДьячкова Алиса Дмитриевна"
             alert(author)
         }
+
         function welcome() {
             alert("Приветствую вас на моей странице!\n Лень, нетерпение и самомнение — \
 три главных добродетели программиста.\nЛарри Уолл")
@@ -53,6 +67,8 @@
         <label>Первое число: <input type="number" value="5154" id="numberA"></label><br>
         <label>Второе число: <input type="number" value="7891" id="numberB"></label><br>
         <div class="message" onclick="showSum()">Найти сумму чисел</div>
+        <div class="message" onclick="minus()">Найти разность чисел</div>
+        <div class="message" onclick="mult()">Найти произведение чисел</div>
         <div class="message" onclick="showAuthor()">Узнать, кто автор страницы</div>
     </main>
 
