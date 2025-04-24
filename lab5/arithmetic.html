@@ -15,6 +15,14 @@
             let result = a + b;
             alert('Сумма ' + a + ' и ' + b + ' равна ' + result);
         }
+        function showAuthor() {
+            let author = "Автор страницы:\nДьячкова Алиса Дмитриевна"
+            alert(author)
+        }
+        function welcome() {
+            alert("Приветствую вас на моей странице!\n Лень, нетерпение и самомнение — \
+три главных добродетели программиста.\nЛарри Уолл")
+        }
     </script>
     <style>
         .message {
@@ -34,16 +42,16 @@
     </style>
 </head>
 <body>
-    <header>
+    <header onclick="showAuthor()">
         НГТУБ ФБ, Лабораторная работа 5
     </header>
 
     <main>
         <div class="message" onclick="showSum()">Сколько будет 5154+7891?</div>
-        <div class="message">Узнать, кто автор страницы</div>
+        <div class="message" onclick="showAuthor()">Узнать, кто автор страницы</div>
     </main>
 
-    <footer>
+    <footer style="cursor: pointer;" ondblclick="welcome()">
         &copy; Дьячкова Алиса, ФБИ-32, 2 курс, 2025
     </footer>
 </body>
