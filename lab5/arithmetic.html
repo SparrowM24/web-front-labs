@@ -79,6 +79,50 @@
             let result = a/b;
             alert(a + " / " + b + " = " + result);
         }
+
+        function divis() {
+            let inputA = document.getElementById('numberA');
+            let inputB = document.getElementById('numberB');
+            let a = parseInt(inputA.value);
+            let b = parseInt(inputB.value);
+
+            inputB.style.color = '';
+            inputB.style.borderColor = '';
+            inputA.style.color = '';
+            inputA.style.borderColor = '';
+
+            if(isNaN(a)) {
+                alert('Введите числовое значение в первое поле');
+                inputA.focus();
+                inputA.select();
+                inputA.style.color = 'red';
+                inputA.style.borderColor = 'red';
+                return;
+            }
+
+            if(isNaN(b)) {
+                alert('Введите числовое значение в первое поле');
+                inputB.focus();
+                inputB.select();
+                inputB.style.color = 'red';
+                inputB.style.borderColor = 'red';
+                return;
+            }
+
+            if(b == 0 && a == 0) {
+                alert("Ошибка измените хотя-бы одно число");
+                inputB.style.color = 'red';
+                inputB.style.borderColor = 'red';
+                inputA.style.color = 'red';
+                inputA.style.borderColor = 'red';
+                return;
+            }
+
+            
+
+            let result = a ** b;
+            alert(a + ' в степени ' + b + ' равна ' + result);
+        }
     </script>
     <style>
         .message {
@@ -109,6 +153,7 @@
         <div class="message" onclick="minus()">Найти разность чисел</div>
         <div class="message" onclick="mult()">Найти произведение чисел</div>
         <div class="message" onclick="showDiv()"> Найти отношение чисел</div>
+        <div class="message" onclick="divis()"> Возведение (число 1) в степень (число 2) </div>
         <div class="message" onclick="showAuthor()">Узнать, кто автор страницы</div>
     </main>
 
