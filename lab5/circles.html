@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дьячкова Алиса Дмитриевна. Лабораторная 4</title>
+    <link rel="stylesheet" href="..\main.css">
+    <link rel="icon" href="..\lab3\favicon-32x32.png" type="image/x-icon">
+    <link rel="icon" href="..\lab3\favicon-16x16.png" type="image/x-icon">
+    <style>
+        header {
+            position: fixed;
+        }
+        main {
+            position: relative;
+        }
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: white;
+            position: absolute;
+            transition: all 0.3s;
+        }
+        .hidden {
+            width: 0;
+            height: 0;
+            opacity: 0;
+        }
+        #resetButton {
+            bottom: 80px;
+            left: 50%;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            position: fixed; 
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУБ ФБ, Лабораторная работа 5
+    </header>
+
+    <main>
+        <div id="circleContainer"></div>
+        <button id="resetButton">Сбросить круги</button>
+    </main>
+
+    <footer>
+        &copy; Дьячкова Алиса, ФБИ-32, 2 курс, 2025
+    </footer>
+
+    <script>
+        const colors = ['#FF5733', '#33FF57', '#3357FF', '#F1C40F', '#8E44AD', '#E74C3C', '#3498DB', '#2ECC71', '#9B59B6', '#E67E22'];
+        const container = document.getElementById('circleContainer');
+        const circleSize = 100;
+        const headerHeight = document.querySelector('header').offsetHeight; // Высота заголовка
+        const footerHeight = document.querySelector('footer').offsetHeight; // Высота подвала
+        const availableHeight = window.innerHeight - headerHeight - footerHeight -150; // Доступная высота для кругов
+        const availableWidth = window.innerWidth -50; // Доступная ширина для кругов
+
+        for (let i = 0; i < 10; i++) {
+            const circle = document.createElement('div');
+            circle.className = 'circle';
+            circle.style.backgroundColor = colors[i];
+            circle.innerText = i + 1;
+
+            const maxTop = availableHeight - circleSize + 100; // Максимальное значение для top
+            const maxLeft = availableWidth - circleSize; // Максимальное значение для left
+            circle.style.top = Math.random() * maxTop + 100 + 'px';
+            circle.style.left = Math.random() * maxLeft + 'px';
+
+            circle.addEventListener('click', () => {
+                circle.classList.add('hidden');
+            });
+
+            container.appendChild(circle);
+        }
+
+        document.getElementById('resetButton').addEventListener('click', () => {
+            const circles = document.querySelectorAll('.circle');
+            circles.forEach(circle => {
+                circle.classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
