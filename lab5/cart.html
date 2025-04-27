@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Дьячкова Алиса Дмитриевна. Лабораторная 4</title>
+    <link rel="stylesheet" href="..\main.css">
+    <link rel="icon" href="..\lab3\favicon-32x32.png" type="image/x-icon">
+    <link rel="icon" href="..\lab3\favicon-16x16.png" type="image/x-icon">
+    <script>
+        function calculateTotal() {
+            const prices = [100, 200, 300, 400, 500];
+            let total = 0;
+    
+            for (let i = 1; i <= prices.length; i++) {
+                let quantity = document.getElementById(`product${i}`);
+                const quantityValue = parseInt(quantity.value) || 0;
+                total += prices[i - 1] * quantityValue
+            }
+            document.getElementById('totalAmount').innerText = `Общая сумма к оплате: ${total} руб.`;
+            }
+    
+        function clearFields() {
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById(`product${i}`).value = '';
+            }
+            document.getElementById('totalAmount').innerText = '';
+        }
+    </script>
+    
+    <style>
+        .cart {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: auto;
+            width: 400px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУБ ФБ, Лабораторная работа 5
+    </header>
+
+    <main>
+        <div class="cart">
+            <h1>Корзина товаров</h1>
+
+            <div class="product">
+                <label>Хлеб (Цена: 100  руб/кг):</label>
+                <input type="number" min="0" placeholder="Количество" id="product1" />
+            </div>
+            <div class="product">
+                <label>Курица (Цена: 200 руб/кг):</label>
+                <input type="number" min="0" placeholder="Количество" id="product2" />
+            </div>
+            <div class="product">
+                <label>Картофель(Цена: 300  руб/кг):</label>
+                <input type="number" min="0" placeholder="Количество" id="product3" />
+            </div>
+            <div class="product">
+                <label>Сыр (Цена: 400  руб/кг):</label>
+                <input type="number" min="0" placeholder="Количество" id="product4" />
+            </div>
+            <div class="product">
+                <label>Чай (Цена: 500  руб/кг):</label>
+                <input type="number" min="0" placeholder="Количество" id="product5" />
+            </div>
+
+            <button onclick="calculateTotal()">Рассчитать</button>
+            <button onclick="clearFields()">Очистить</button>
+
+            <div class="total" id="totalAmount"></div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Дьячкова Алиса, ФБИ-32, 2 курс, 2025
+    </footer>
+</body>
+</html>
