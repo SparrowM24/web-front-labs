@@ -15,22 +15,21 @@
             document.getElementById('blurImage').style.filter = 'blur(' + value + ')';
         }
 
-        function Changes(functionChange, metrics) {
+        function Changes(functionChange, metrics, numPic) {
             let value = document.getElementById(`${functionChange} 1`).value + metrics;
             document.getElementById(`${functionChange} 2`).innerText = value;
-            document.getElementById('blurImage').style.filter = `${functionChange}(${value})`;
+            document.getElementById(`blurImage ${numPic}`).style.filter = `${functionChange}(${value})`;
         }
     </script>
     <style>
         img {
-            width: 60%;
-            position: absolute;
-            top: 15%;
+            width: 100%;
         }
-        .filters {
-            position: absolute;
-            top: 20%;
-            left: 65%;
+        #row {
+            display: flex; /* Изменено на flex для расположения в ряд */
+        }
+        #filt {
+            margin: auto;
         }
     </style>
 </head>
@@ -41,43 +40,77 @@
 
     <main>
         <div class="filters">
-            Фильт blur:
-            <input type="range" min="0" max="20" value="0" onchange="blurChange()" id="blurValue">
-            <span id="blurOutput"></span><br>
+            <div id="row">
+                <div id='filt'>
+                    Фильт blur:
+                    <input type="range" min="0" max="20" value="0" onchange="blurChange()" id="blurValue">
+                    <span id="blurOutput"></span>
+                </div>
+                <div id='filt'>
+                    Фильт brightness:
+                    <input type="range" min="0" max="500" value="100" onchange="Changes('brightness', '%', '1')" id="brightness 1">
+                    <span id="brightness 2"></span>
+                </div>
+                <div id='filt'>    
+                    Фильт contrast:
+                    <input type="range" min="0" max="500" value="100" onchange="Changes('contrast', '%', '2')" id="contrast 1">
+                    <span id="contrast 2"></span>
+                </div>
+            </div>
 
-            Фильт brightness:
-            <input type="range" min="0" max="500" value="100" onchange="Changes('brightness', '%')" id="brightness 1">
-            <span id="brightness 2"></span><br>
+            <div id="row">
+                <div><img src="Pic.jpg" id="blurImage"></div>
+                <div><img src="Pic.jpg" id="blurImage 1"></div>
+                <div><img src="Pic.jpg" id="blurImage 2"></div>
+            </div>
 
-            Фильт contrast:
-            <input type="range" min="0" max="500" value="100" onchange="Changes('contrast', '%')" id="contrast 1">
-            <span id="contrast 2"></span><br>
+            <div id="row">
+                <div id='filt'>
+                    Фильт grayscale:
+                    <input type="range" min="0" max="100" value="0" onchange="Changes('grayscale', '%', '3')" id="grayscale 1">
+                    <span id="grayscale 2"></span>
+                </div>
 
-            Фильт grayscale:
-            <input type="range" min="0" max="100" value="0" onchange="Changes('grayscale', '%')" id="grayscale 1">
-            <span id="grayscale 2"></span><br>
-            
-            Фильт hue-rotate:
-            <input type="range" min="0" max="360" value="0" onchange="Changes('hue-rotate', 'deg')" id="hue-rotate 1">
-            <span id="hue-rotate 2"></span><br>
-            
-            Фильт invert:
-            <input type="range" min="0" max="100" value="0" onchange="Changes('invert', '%')" id="invert 1">
-            <span id="invert 2"></span><br>
-            
-            Фильт saturate:
-            <input type="range" min="0" max="500" value="100" onchange="Changes('saturate', '%')" id="saturate 1">
-            <span id="saturate 2"></span><br>
-            
-            Фильт sepia:
-            <input type="range" min="0" max="100" value="0" onchange="Changes('sepia', '%')" id="sepia 1">
-            <span id="sepia 2"></span><br>
-            
-            
+                <div id='filt'>
+                    Фильт hue-rotate:
+                    <input type="range" min="0" max="360" value="0" onchange="Changes('hue-rotate', 'deg', '4')" id="hue-rotate 1">
+                    <span id="hue-rotate 2"></span>
+                </div>
 
+                <div id='filt'>
+                    Фильт invert:
+                    <input type="range" min="0" max="100" value="0" onchange="Changes('invert', '%', '5')" id="invert 1">
+                    <span id="invert 2"></span>
+                </div>
+            </div>
+
+            <div id="row">
+                <div><img src="Pic.jpg" id="blurImage 3"></div>
+                <div><img src="Pic.jpg" id="blurImage 4"></div>
+                <div><img src="Pic.jpg" id="blurImage 5"></div>
+            </div>
+
+            <div id="row">
+
+                <div id='filt'>
+                    Фильт saturate:
+                    <input type="range" min="0" max="500" value="100" onchange="Changes('saturate', '%', '6')" id="saturate 1">
+                    <span id="saturate 2"></span>
+                </div>
+
+                <div id='filt'>
+                    Фильт sepia:
+                    <input type="range" min="0" max="100" value="0" onchange="Changes('sepia', '%', '7')" id="sepia 1">
+                    <span id="sepia 2"></span>
+                </div>
+            </div>
+
+            <div id="row">
+                <div><img src="Pic.jpg" id="blurImage 6"></div>
+                <div><img src="Pic.jpg" id="blurImage 7"></div>
+            </div>
         </div>
-        <div><img src="Pic.jpg" id="blurImage"></div>
-    </main>
+
 
     <footer>
         &copy; Дьячкова Алиса, ФБИ-32, 2 курс, 2025
