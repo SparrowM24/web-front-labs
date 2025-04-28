@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Дьячкова Алиса Дмитриевна. Лабораторная 5</title>
+    <link rel="stylesheet" href="..\main.css">
+    <link rel="icon" href="..\lab3\favicon-32x32.png" type="image/x-icon">
+    <link rel="icon" href="..\lab3\favicon-16x16.png" type="image/x-icon">
+    <style>
+        #block {
+            width: 400px;
+            height: 400px;
+            border: 2px solid black;
+            background-color: #a8dadc;
+            cursor: crosshair;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+    </style>
+    <script>
+        function showCoords(event) {
+            let x = event.clientX;
+            let y = event.clientY;
+            let div = document.getElementById('block');
+            let textColor = 'black';
+            let additionalText = '';
+            div.style.backgroundColor = '#a8dadc';
+
+            if (event.ctrlKey) {
+                textColor = 'red';
+                additionalText += 'Нажата клавиша Ctrl<br>';
+            }
+            if (event.altKey) {
+                div.style.backgroundColor = '#ccffcc';
+                additionalText += 'Нажата клавиша Alt<br>';
+            }
+            if (event.shiftKey) {
+                div.style.border = '2px dashed blue';
+                additionalText += 'Нажата клавиша Shift<br>';
+            } else {
+                div.style.border = '2px solid black';
+            }
+
+            div.style.color = textColor;
+            div.innerHTML = `<div><b>x</b> = ${x}px <br> <b>y</b> = ${y}px <br>${additionalText}</div>`;
+        }
+
+    </script>
+</head>
+<body>
+    <header>
+        НГТУБ ФБ, Лабораторная работа 5
+    </header>
+
+    <main>
+        <div id="block" onmousemove="showCoords(event)"></div>
+    </main>
+
+    <footer>
+        &copy; Дьячкова Алиса, ФБИ-32, 2 курс, 2025
+    </footer>
+</body>
+</html>
