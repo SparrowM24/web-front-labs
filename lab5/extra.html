@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Дьячкова Алиса Дмитриевна. Лабораторная 5</title>
+        <link rel="stylesheet" href="..\main.css">
+        <link rel="icon" href="..\lab3\favicon-32x32.png" type="image/x-icon">
+        <link rel="icon" href="..\lab3\favicon-16x16.png" type="image/x-icon">
+        <style>
+            .container {
+                text-align: left;
+            }
+
+            img {
+                width: 400px;
+            }
+
+        </style>
+        <script>
+            function Changes(functionChange, metrics, event) {
+                let image = document.getElementById('image');
+                let imgWidth = image.clientWidth;
+                let rect = image.getBoundingClientRect();
+                let x = event.clientX - rect.left;
+                let percentage = Math.ceil((x / imgWidth) * 100);
+                let value = `${percentage}${metrics}`;
+                document.getElementById('filterValue').innerText = value;
+                document.getElementById('image').style.filter = `${functionChange}(${value})`;
+            }
+    
+            function Filters(event) {
+                let filterFunction = 'sepia';
+                let metrics = '%';
+                if (event.ctrlKey) {
+                    filterFunction = 'grayscale';
+                } else if (event.altKey) {
+                    filterFunction = 'invert';
+                } else if (event.shiftKey) {
+                    filterFunction = 'contrast';
+                }
+                document.getElementById('filterType').innerText = filterFunction;
+                Changes(filterFunction, metrics, event);
+            }
+    
+        </script>
+    </head>
+    <body>
+        <header>
+            НГТУБ ФБ, Лабораторная работа 5
+        </header>
+    
+        <main>
+            <p>Наведите мышь на изображение, чтобы применить фильтр Sepia. <br>Используйте Ctrl, Alt и Shift для других фильтров.</p>
+            <img id="image" src="Pic2.jpg" alt="Изображение"  onmousemove="Filters(event)"> <br>
+            Фильтр: <span id="filterType"></span><br>
+            Значение фильтра: <span id="filterValue"></span>
+        </main>
+
+        <footer>
+            &copy; Дьячкова Алиса, ФБИ-32, 2 курс, 2025
+        </footer>
+
+        <script>
+            let image = document.getElementById('image');
+            image.style.filter = 'sepia(0%)';
+        </script>
+    </body>
+</html>
+
+
+
