@@ -11,22 +11,46 @@
     <script>
         function showMutipleTable() {
             let tbl = document.getElementById('mtable');
+            let num = document.getElementById('numb').value;
+            let start = document.getElementById('start').value;
+            let finish = document.getElementById('end').value;
             tbl.innerHTML = '<h1>Таблица умножения</h1>';
-            for(i = 1; i <= 10; i++){
-                let s = `<div>${i} * 7 = ${i*7}</div>`;
-                tbl.innerHTML += s;
+            if (start > finish) {
+                for (i = start; i >= finish; i--){
+                    let s = `<div>${i} * ${num} = ${i*num}</div>`;
+                    tbl.innerHTML += s;
+                }
+            }
+            else {
+                for(i = start; i <= finish; i++){
+                    let s = `<div>${i} * ${num} = ${i*num}</div>`;
+                    tbl.innerHTML += s;
+                }
             }
         }
-        showMutipleTable();
     </script>
 </head>
-<body onload="showMutipleTable()">
+<body>
     <header>
         НГТУБ ФБ, Лабораторная работа 6
     </header>
 
     <main>
         <div id="mtable"></div>
+        <hr>
+        <div>
+            Умножить на:
+            <input type="number" id='numb' value="1"/>
+        </div>
+        <div>
+            Начать с:
+            <input type="number" id='start' value="1"/>
+        </div>
+        <div>
+            Закончить на:
+            <input type="number" id='end' value="10"/>
+        </div>
+        <button onclick="showMutipleTable()">Таблица</button>
     </main>
 
     <footer>
