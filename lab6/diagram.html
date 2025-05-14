@@ -11,28 +11,33 @@
     <style>
         .bar {
             height: 100px;
-            width: 300px;
+            width: 8%;
             margin: 5px;
             border-radius: 15px;
             background-color:#a8dadc;
             border-color: #a8dadc;
             color: #f1faee;
             text-align: center;
+            display:inline-block;
+            vertical-align: bottom;
         } 
+        main{
+            text-align: center;
+            
+        }
     </style>
     <script>
         function showDiagram(){
             let data = [36, 86, 55, 28, 92, 60, 41, 17, 9, 43];
+            let colors = [ "#000000",  "#FFFFFF",  "#FF0000",  "#00FF00",  "#0000FF",  "#FFFF00",  "#00FFFF",  "#FF00FF",  "#808080",  "#D3D3D3",  "#00008B",  "#006400", "#8B0000", "#FFA500", "#800080", "#FFC0CB"];
             let bars = document.getElementsByClassName('bar');
-            const diagwidth = document.getElementById('diag').clientWidth;
+            const diagheight = document.getElementById('diag').clientHeight;
             const maxData = Math.max(...data);
-            const k = diagwidth / maxData * 0.9;
-            let color = [];
-            for(let i =0; i < 10; i++){
-                color += [``]
-            }
+            const k = diagheight / maxData * 5;
             for(let i = 0; i < data.length; i++){
-                bars[i].style.width = k * data[i] + 'px';
+                bars[i].style.height = k * data[i] + 'px';
+                bars[i].style.background = colors[i];
+                bars[i].textContent = `${data[i]}`;
             }
         }
     </script>
