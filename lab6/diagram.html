@@ -16,14 +16,13 @@
             border-radius: 15px;
             background-color:#a8dadc;
             border-color: #a8dadc;
-            color: #f1faee;
+            color: #332b30;
             text-align: center;
             display:inline-block;
             vertical-align: bottom;
         } 
         main{
-            text-align: center;
-            
+            text-align: center; 
         }
     </style>
     <script>
@@ -37,7 +36,7 @@
             for(let i = 0; i < data.length; i++){
                 bars[i].style.height = k * data[i] + 'px';
                 bars[i].style.background = colors[i];
-                bars[i].textContent = `${data[i]}`;
+                bars[i].innerText = `${data[i]}`;
             }
         }
     </script>
