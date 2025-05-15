@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="..\main.css">
     <link rel="icon" href="..\lab3\favicon-32x32.png" type="image/x-icon">
     <link rel="icon" href="..\lab3\favicon-16x16.png" type="image/x-icon">
+    <style>
+        header {
+            transition: color 1s; 
+        }
+    </style>
     <script>
         function showDate() {
             const locales = {
@@ -27,6 +32,24 @@
             }
             out.innerHTML = result;
         }
+        function ChangeColors() {
+            const header = document.getElementsByTagName('header')[0];
+            const rgb = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+            header.style.color = rgb;
+        }
+        let timerNum;
+        
+        function startChangeColors() {
+            ChangeColors();
+            timerNum = setInterval(ChangeColors, 1000);
+            document.getElementById('start-btn').disabled = true;
+            document.getElementById('stop-btn').disabled = false;
+        }
+        function stopChangeColors() {
+            clearInterval(timerNum);
+            document.getElementById('start-btn').disabled = false;
+            document.getElementById('stop-btn').disabled = true;
+        }
     </script>    
 </head>
 <body onload="showDate()">
@@ -36,6 +59,10 @@
 
     <main>
         <div id="current-date"></div>
+        <div>
+            <button onclick="startChangeColors()" id="start-btn">Старт</button>
+            <button onclick="stopChangeColors()" id="stop-btn">Стоп</button>
+        </div>    
     </main>
 
     <footer>
