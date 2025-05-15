@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Дьячкова Алиса Дмитриевна. Лабораторная 6</title>
+    <link rel="stylesheet" href="..\main.css">
+    <link rel="icon" href="..\lab3\favicon-32x32.png" type="image/x-icon">
+    <link rel="icon" href="..\lab3\favicon-16x16.png" type="image/x-icon">
+    <script>
+        function showDate() {
+            const locales = {
+                'ru-RU': 'Русский (Россия)',
+                'en-US': 'Английский (США)',
+                'fr-FR': 'Французский (Франция)',
+                'de-DE': 'Немецкий (Германия)',
+                'ja-JP': 'Японский (Япония)'
+            };
+            let out = document.getElementById('current-date');
+            let today = new Date();
+            let result = '';
+            for (const localeCode of Object.keys(locales)) {
+                const localeName = locales[localeCode];
+                const formattedDate = today.toLocaleString(localeCode);
+                result += `<div class="locale-row">Дата и время для ${localeName} локали: ${formattedDate}</div>`;
+            }
+            out.innerHTML = result;
+        }
+    </script>    
+</head>
+<body onload="showDate()">
+    <header>
+        Вывод даты и времени для разных локалей
+    </header>
+
+    <main>
+        <div id="current-date"></div>
+    </main>
+
+    <footer>
+        &copy; Дьячкова Алиса, ФБИ-32, 2 курс, 2025
+    </footer>
+</body>
+</html>
