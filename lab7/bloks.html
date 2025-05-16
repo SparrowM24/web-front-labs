@@ -8,6 +8,18 @@
     <link rel="stylesheet" href="..\main.css">
     <link rel="icon" href="..\lab3\favicon-32x32.png" type="image/x-icon">
     <link rel="icon" href="..\lab3\favicon-16x16.png" type="image/x-icon">
+    <script>
+        function addNewBlock(){
+            let newBlock = document.createElement('div');
+            newBlock.style.backgroundColor = 'green';
+            newBlock.style.height = '40px';
+            newBlock.style.border = '2px solid black'; 
+            newBlock.style.width = '100%'; 
+            newBlock.style.margin = '10px 0'; 
+
+            document.querySelector('main').appendChild(newBlock);
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -15,7 +27,7 @@
     </header>
 
     <main>
-        <a href="bloks.html">Добавление блоков</a>
+        <button onclick="addNewBlock()">Добавить блок</button>
     </main>
 
     <footer>
