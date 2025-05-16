@@ -1,23 +1,14 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Диаграмма температур</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Дьячкова Алиса Дмитриевна. Лабораторная 6</title>
+    <link rel="stylesheet" href="..\main.css">
+    <link rel="icon" href="..\lab3\favicon-32x32.png" type="image/x-icon">
+    <link rel="icon" href="..\lab3\favicon-16x16.png" type="image/x-icon">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 20px;
-            background: #f7fafc;
-            color: #2c3e50;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #34495e;
-        }
-
         #chart-container {
             max-width: 960px;
             margin: 0 auto 40px auto;
@@ -41,9 +32,9 @@
 
         #y-axis {
             position: absolute;
-            left: 15px;
-            top: 0;
-            bottom: 0; 
+            left: -30px;
+            top: 15px;
+            bottom: 50px; 
             width: 40px;
             display: flex;
             flex-direction: column;
@@ -127,7 +118,6 @@
             min-height: 30px;
         }
 
-        /* Дополнительный блок для вывода экстремумов */
         #extremes-info {
             margin-top: 16px;
             font-weight: 600;
@@ -137,113 +127,122 @@
     </style>
 </head>
 <body>
-    <h1>Температуры за месяц</h1>
-    <div id="chart-container">
-        <div id="y-axis">
-            <div>+50°C</div>
-            <div>+25°C</div>
-            <div>0°C</div>
-            <div>-25°C</div>
-            <div>-50°C</div>
+    <header>
+        НГТУБ ФБ, Лабораторная работа 6
+    </header>
+    <main>
+        <h1>Температуры за месяц</h1>
+        <div id="chart-container">
+            <div id="y-axis">
+                <div>+50°C</div>
+                <div>+25°C</div>
+                <div>0°C</div>
+                <div>-25°C</div>
+                <div>-50°C</div>
+            </div>
+            <div id="chart"></div>
+            <div id="days-labels"></div>
         </div>
-        <div id="chart"></div>
-        <div id="days-labels"></div>
-    </div>
-    <div id="input-container">
-        <label for="day-input">Введите номер дня (1-30): </label>
-        <input type="number" id="day-input" min="1" max="30" placeholder="день" onclick="handleClick()"/>
-        <div id="info"></div>
-    </div>
-    <div id="extremes-info"></div>
-    <script>
-        const TEMP_MIN = -50;
-        const TEMP_MAX = 50;
-        const CHART_HEIGHT = 320;
-        const days = [];
+        <div id="input-container">
+            <label for="day-input">Введите номер дня (1-30): </label>
+            <input type="number" id="day-input" min="1" max="30" placeholder="день" onclick="handleClick()"/>
+            <div id="info"></div>
+        </div>
+        <div id="extremes-info"></div>
+        <script>
+            const TEMP_MIN = -50;
+            const TEMP_MAX = 50;
+            const CHART_HEIGHT = 320;
+            const days = [];
 
-        // Генерируем данные для 30 дней
-        for (let dayIndex = 0; dayIndex < 30; dayIndex++) {
-            let minT = Math.floor(Math.random() * 76) - 50;
-            let maxT = Math.floor(Math.random() * (TEMP_MAX - minT + 1)) + minT;
-            days.push({ min: minT, max: maxT });
-        }
-
-        function tempToHeight(temp) {
-            const range = TEMP_MAX - TEMP_MIN;
-            return ((temp - TEMP_MIN) / range) * CHART_HEIGHT;
-        }
-
-        const chartEl = document.getElementById('chart');
-        const dayElements = [];
-
-        // Фильтрация максимальных и минимальных значений
-        let globalMinTemp = 100;
-        let globalMaxTemp = -100;
-
-        for (let i = 0; i < days.length; i++) {
-            const day = days[i];
-            const col = document.createElement('div');
-            col.className = 'day-column';
-            col.dataset.day = i + 1;
-
-            const minHeight = tempToHeight(day.min);
-            const maxHeight = tempToHeight(day.max);
-
-            const barMin = document.createElement('div');
-            barMin.className = 'bar-min';
-            barMin.style.height = minHeight + 'px';
-            barMin.title = `День ${i + 1} мин: ${day.min}°C`;
-
-            const barMax = document.createElement('div');
-            barMax.className = 'bar-max';
-            barMax.style.height = maxHeight + 'px';
-            barMax.title = `День ${i + 1} макс: ${day.max}°C`;
-
-            col.appendChild(barMin);
-            col.appendChild(barMax);
-            chartEl.appendChild(col);
-
-            dayElements.push({ col, barMin, barMax, dayData: day });
-            if (day.min < globalMinTemp) globalMinTemp = day.min;
-            if (day.max > globalMaxTemp) globalMaxTemp = day.max;
-        }
-
-        // Создаём и добавляем подписи дней под графиком
-        const daysLabelsContainer = document.getElementById('days-labels');
-        for (let i = 0; i < 30; i++) {
-            const dayLabel = document.createElement('div');
-            dayLabel.className = 'day-label-global';
-            dayLabel.textContent = i + 1;
-            daysLabelsContainer.appendChild(dayLabel);
-        }
-
-        let selectedDayIndex = null;
-        const inputEl = document.getElementById('day-input');
-        const infoEl = document.getElementById('info');
-        const extremesInfoEl = document.getElementById('extremes-info');
-
-        extremesInfoEl.innerHTML = `
-            Мин. темп.: ${globalMinTemp} °C<br>
-            Макс. темп.: ${globalMaxTemp} °C
-        `;
-
-        function highlightDay(dayNum) {
-            if (selectedDayIndex !== null) {
-                const previousDay = dayElements[selectedDayIndex];
-                previousDay.barMin.classList.remove('highlight');
-                previousDay.barMax.classList.remove('highlight');
+            // Генерируем данные для 30 дней
+            for (let dayIndex = 0; dayIndex < 30; dayIndex++) {
+                let minT = Math.floor(Math.random() * 76) - 50;
+                let maxT = Math.floor(Math.random() * (TEMP_MAX - minT + 1)) + minT;
+                days.push({ min: minT, max: maxT });
             }
-            if (dayNum >= 1 && dayNum <= 30) {
-                const newSelectedDay = dayElements[dayNum - 1];
-                newSelectedDay.barMin.classList.add('highlight');
-                newSelectedDay.barMax.classList.add('highlight');
-                infoEl.textContent = `День ${dayNum}: минимальная температура ${newSelectedDay.dayData.min}°C, максимальная температура ${newSelectedDay.dayData.max}°C`;
-                selectedDayIndex = dayNum - 1;
-            } 
-        }
-        function handleClick() {
-            highlightDay(parseInt(inputEl.value));
-        }
-    </script>
+
+            function tempToHeight(temp) {
+                const range = TEMP_MAX - TEMP_MIN;
+                return ((temp - TEMP_MIN) / range) * CHART_HEIGHT;
+            }
+
+            const chartEl = document.getElementById('chart');
+            const dayElements = [];
+
+            // Фильтрация максимальных и минимальных значений
+            let globalMinTemp = 100;
+            let globalMaxTemp = -100;
+
+            for (let i = 0; i < days.length; i++) {
+                const day = days[i];
+                const col = document.createElement('div');
+                col.className = 'day-column';
+                col.dataset.day = i + 1;
+
+                const minHeight = tempToHeight(day.min);
+                const maxHeight = tempToHeight(day.max);
+
+                const barMin = document.createElement('div');
+                barMin.className = 'bar-min';
+                barMin.style.height = minHeight + 'px';
+                barMin.title = `День ${i + 1} мин: ${day.min}°C`;
+
+                const barMax = document.createElement('div');
+                barMax.className = 'bar-max';
+                barMax.style.height = maxHeight + 'px';
+                barMax.title = `День ${i + 1} макс: ${day.max}°C`;
+
+                col.appendChild(barMin);
+                col.appendChild(barMax);
+                chartEl.appendChild(col);
+
+                dayElements.push({ col, barMin, barMax, dayData: day });
+                if (day.min < globalMinTemp) globalMinTemp = day.min;
+                if (day.max > globalMaxTemp) globalMaxTemp = day.max;
+            }
+
+            // Создаём и добавляем подписи дней под графиком
+            const daysLabelsContainer = document.getElementById('days-labels');
+            for (let i = 0; i < 30; i++) {
+                const dayLabel = document.createElement('div');
+                dayLabel.className = 'day-label-global';
+                dayLabel.textContent = i + 1;
+                daysLabelsContainer.appendChild(dayLabel);
+            }
+
+            let selectedDayIndex = null;
+            const inputEl = document.getElementById('day-input');
+            const infoEl = document.getElementById('info');
+            const extremesInfoEl = document.getElementById('extremes-info');
+
+            extremesInfoEl.innerHTML = `
+                Мин. темп.: ${globalMinTemp} °C<br>
+                Макс. темп.: ${globalMaxTemp} °C
+            `;
+
+            function highlightDay(dayNum) {
+                if (selectedDayIndex !== null) {
+                    const previousDay = dayElements[selectedDayIndex];
+                    previousDay.barMin.classList.remove('highlight');
+                    previousDay.barMax.classList.remove('highlight');
+                }
+                if (dayNum >= 1 && dayNum <= 30) {
+                    const newSelectedDay = dayElements[dayNum - 1];
+                    newSelectedDay.barMin.classList.add('highlight');
+                    newSelectedDay.barMax.classList.add('highlight');
+                    infoEl.textContent = `День ${dayNum}: минимальная температура ${newSelectedDay.dayData.min}°C, максимальная температура ${newSelectedDay.dayData.max}°C`;
+                    selectedDayIndex = dayNum - 1;
+                } 
+            }
+            function handleClick() {
+                highlightDay(parseInt(inputEl.value));
+            }
+        </script>
+        </main>
+
+    <footer>
+        &copy; Дьячкова Алиса, ФБИ-32, 2 курс, 2025
+    </footer>
 </body>
 </html>
