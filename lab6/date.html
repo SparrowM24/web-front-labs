@@ -13,7 +13,7 @@
             transition: color 1s; 
         }
     </style>
-    <script>
+     <script>
         function showDate() {
             const locales = {
                 'ru-RU': 'Русский (Россия)',
@@ -28,7 +28,25 @@
             for (const localeCode of Object.keys(locales)) {
                 const localeName = locales[localeCode];
                 const formattedDate = today.toLocaleString(localeCode);
-                result += `<div class="locale-row">Дата и время для ${localeName} локали: ${formattedDate}</div>`;
+                result += `<div>Дата и время для ${localeName} локали: ${formattedDate}</div>`;
+            }
+            out.innerHTML = result;
+        }
+        function updateDate() {
+            const locales = {
+                'ru-RU': 'Русский (Россия)',
+                'en-US': 'Английский (США)',
+                'fr-FR': 'Французский (Франция)',
+                'de-DE': 'Немецкий (Германия)',
+                'ja-JP': 'Японский (Япония)'
+            };
+            let out = document.getElementById('current-date');
+            let today = new Date();
+            let result = '';
+            for (const localeCode of Object.keys(locales)) {
+                const localeName = locales[localeCode];
+                const formattedDate = today.toLocaleString(localeCode);
+                result += `<div>Дата и время для ${localeName} локали: ${formattedDate}</div>`;
             }
             out.innerHTML = result;
         }
@@ -38,7 +56,7 @@
             header.style.color = rgb;
         }
         let timerNum;
-        
+        let dateTimer;
         function startChangeColors() {
             ChangeColors();
             timerNum = setInterval(ChangeColors, 1000);
@@ -50,7 +68,18 @@
             document.getElementById('start-btn').disabled = false;
             document.getElementById('stop-btn').disabled = true;
         }
-    </script>    
+        function startUpdateDate() {
+            updateDate();
+            dateTimer = setInterval(updateDate, 1000);
+            document.getElementById('start-date-btn').disabled = true;
+            document.getElementById('stop-date-btn').disabled = false;
+        }
+        function stopUpdateDate() {
+            clearInterval(dateTimer);
+            document.getElementById('start-date-btn').disabled = false;
+            document.getElementById('stop-date-btn').disabled = true;
+        }
+    </script>     
 </head>
 <body onload="showDate()">
     <header>
@@ -60,6 +89,8 @@
     <main>
         <div id="current-date"></div>
         <div>
+            <button onclick="startUpdateDate()" id="start-date-btn">Обновлять время</button>
+            <button onclick="stopUpdateDate()" id="stop-date-btn">Остановить обновление времени</button><br>
             <button onclick="startChangeColors()" id="start-btn">Старт</button>
             <button onclick="stopChangeColors()" id="stop-btn">Стоп</button>
         </div>    
