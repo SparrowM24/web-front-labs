@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дьячкова Алиса Дмитриевна. Лабораторная 7</title>
+    <link rel="stylesheet" href="..\main.css">
+    <link rel="icon" href="..\lab3\favicon-32x32.png" type="image/x-icon">
+    <link rel="icon" href="..\lab3\favicon-16x16.png" type="image/x-icon">
+    <style>
+        .exchange-rate {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
+        .positive {
+            color: green;
+        }
+        .negative {
+            color: red;
+        }
+        .neutral {
+            color: black;
+        }
+        .link {
+            display: block;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+    <script>
+        function getEuroExchangeRate() {
+            const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
+            fetch(url)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(json) {
+                    const currentRate = json.Valute.EUR.Value;
+                    const previousRate = json.Valute.EUR.Previous;
+                    const date = json.Date;
+
+                    const difference = (currentRate - previousRate).toFixed(2);
+                    let differenceText = '';
+                    let differenceClass = 'neutral';
+
+                    if (difference > 0) {
+                        differenceText = `Курс поднялся на ${difference} руб.`;
+                        differenceClass = 'positive';
+                    } else if (difference < 0) {
+                        differenceText = `Курс опустился на ${Math.abs(difference)} руб.`;
+                        differenceClass = 'negative';
+                    } else {
+                        differenceText = 'Курс остался без изменений.';
+                    }
+
+                    const output = `
+                        <div class="exchange-rate">
+                            <h2>Текущий курс евро</h2>
+                            <p>Дата запроса: ${date}</p>
+                            <p>Текущий курс: ${currentRate} руб.</p>
+                            <p>Курс за предыдущую дату: ${previousRate} руб.</p>
+                            <p class="${differenceClass}">${differenceText}</p>
+                        </div>
+                    `;
+
+                    document.getElementById('exchange-output').innerHTML = output;
+                })
+                .catch(function(error) {
+                    console.error('Ошибка:', error);
+                });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУБ ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <button onclick="getEuroExchangeRate()">Получить курс евро</button>
+        <div id="exchange-output"></div>
+        <a class="link" href="https://www.cbr-xml-daily.ru/" target="_blank" style="width: 30%;">Источник: Центральный банк Российской Федерации</a>
+    </main>
+
+    <footer>
+        &copy; Дьячкова Алиса, ФБИ-32, 2 курс, 2025
+    </footer>
+</body>
+</html>
