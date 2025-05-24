@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="..\lab3\favicon-32x32.png" type="image/x-icon">
+    <link rel="icon" href="..\lab3\favicon-16x16.png" type="image/x-icon">
+    <title>Прогноз погоды в Новосибирске</title>
+    <link rel="stylesheet" href="..\main.css">
+    <style>
+        .weather-info {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
+        .temperature {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function getWeatherForecast() {
+            const url = 'https://api.open-meteo.com/v1/forecast?latitude=55.0415&longitude=82.9346&hourly=temperature_2m&timezone=Asia%2FBangkok';
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const times = data.hourly.time;
+                    const temperatures = data.hourly.temperature_2m;
+
+                    const today = new Date();
+                    const currentDate = today.toISOString().split('T')[0]; 
+
+                    const indices = [];
+                    for (let i = 0; i < times.length; i++) {
+                        if (times[i].startsWith(currentDate)) {
+                            const hour = times[i].split('T')[1].split(':')[0];
+                            if (hour === '08' || hour === '12' || hour === '20') {
+                                indices.push(i);
+                            }
+                        }
+                    }
+
+                    let output = '<div class="weather-info"><h2>Температура в Новосибирске</h2>';
+                    indices.forEach(index => {
+                        output += `<p>Время: ${times[index]} - Температура: <span class="temperature">${temperatures[index]} °C</span></p>`;
+                    });
+                    output += '</div>';
+                    document.getElementById('weather-output').innerHTML = output;
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        Прогноз погоды в Новосибирске
+    </header>
+
+    <main>
+        <button onclick="getWeatherForecast()">Получить прогноз погоды</button>
+        <div id="weather-output" style="width: 50%;"></div>
+    </main>
+
+    <footer>
+        &copy; Дьячкова Алиса, ФБИ-32, 2 курс, 2025
+    </footer>
+</body>
+</html>
