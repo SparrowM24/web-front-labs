@@ -4,10 +4,71 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Дьячкова Алиса Дмитриевна. Лабораторная 7</title>
+    <title>Дьячкова Алиса Дмитриевна. Лабораторная 7</title>
     <link rel="stylesheet" href="..\main.css">
     <link rel="icon" href="..\lab3\favicon-32x32.png" type="image/x-icon">
     <link rel="icon" href="..\lab3\favicon-16x16.png" type="image/x-icon">
+    <script>
+        const Legal_close = [302.22, 304.25, 303.58, 305.20, 311.20, 305.46, 302.51, 311.20, 312.50, 310.46];
+        const date = ['23.05.2025', '22.05.2025', '21.05.2025', '20.05.2025', '19.05.2025', '16.05.2025', '15.05.2025', '14.05.2025', '13.05.2025', '12.05.2025'];
+
+        function showStockPrices() {
+            let table = document.getElementById('stock-table');
+            table.innerHTML = ''; 
+
+            let headerRow = document.createElement('tr');
+            headerRow.innerHTML = '<th>Дата</th><th>Цена акций</th><th>Разница</th>';
+            table.appendChild(headerRow);
+
+            let sum = 0;
+            let max = Legal_close[0];
+            let min = Legal_close[0];
+
+            for (let i = 0; i < Legal_close.length; i++) {
+                let tr = document.createElement('tr');
+                let tdDate = document.createElement('td');
+                let tdPrice = document.createElement('td');
+                let tdDifference = document.createElement('td');
+
+                tdDate.innerText = date[i];
+                tdPrice.innerText = Legal_close[i].toFixed(2);
+                sum += Legal_close[i];
+
+                if (i === 0) {
+                    tdDifference.innerText = '-'; 
+                } else {
+                    let difference = Legal_close[i] - Legal_close[i - 1];
+                    tdDifference.innerText = difference.toFixed(2);
+                    
+                    if (difference > 0) {
+                        tdDifference.style.color = 'green';
+                    } else if (difference < 0) {
+                        tdDifference.style.color = 'red';
+                    } else {
+                        tdDifference.style.color = 'black';
+                    }
+                }
+
+                tr.appendChild(tdDate);
+                tr.appendChild(tdPrice);
+                tr.appendChild(tdDifference);
+                table.appendChild(tr);
+
+                
+                if (Legal_close[i] > max) {
+                    max = Legal_close[i];
+                }
+                if (Legal_close[i] < min) {
+                    min = Legal_close[i];
+                }
+            }
+
+            let average = (sum / Legal_close.length).toFixed(2);
+            document.getElementById('average').textContent = `Среднее значение: ${average}`;
+            document.getElementById('max').textContent = `Максимальное значение: ${max.toFixed(2)}`;
+            document.getElementById('min').textContent = `Минимальное значение: ${min.toFixed(2)}`;
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -15,7 +76,11 @@
     </header>
 
     <main>
-        
+        <button onclick="showStockPrices()">Курс акций Сбербанк России</button>
+        <table border="1" id="stock-table"></table><br>
+        <div id="average"></div>
+        <div id="max"></div>
+        <div id="min"></div>
     </main>
 
     <footer>
