@@ -22,6 +22,17 @@
             min-width: 50px;
             display: inline-block;
         }
+        .flower-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .tooltip-inner {
+            background-color: #0d6efd;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -35,7 +46,7 @@
         <div id="app">
             <section class="mb-5">
                 <div class="alert alert-info">
-                    <h1 :title="messageRus"><i class="bi bi-chat-left-text"></i><span class="ms-2">{{ message }}</h1>
+                    <h1 :title="messageRus"><i class="bi bi-chat-left-text me-2"></i>{{ message }}</h1>
                 </div>
             </section>
 
@@ -71,15 +82,25 @@
                 <h2 class="mb-3">
                     <i class="bi bi-flower1"></i> Цветы (карточка)
                 </h2>
-                <div class="card" style="width: 18rem;">
+                <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title"><i class="bi bi-flower2"></i> Цветы</h2>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2 class="card-title mb-0"><i class="bi bi-flower2"></i> Цветы</h2>
+                            <button @click="addFlower" class="btn btn-success btn-sm">
+                                <i class="bi bi-plus-circle"></i> Добавить
+                            </button>
+                        </div>
                         <ul class="list-group">
-                            <li v-for="(flower, id) in flowers" class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ flower }}
-                                <button @click="edit(id, flower)" class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-pencil"></i>
-                                </button>
+                            <li v-for="(flower, id) in flowers" :key="id" class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>{{ flower }}</span>
+                                <div class="flower-actions">
+                                    <button @click="edit(id, flower)" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button @click="deleteFlower(id)" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -90,6 +111,12 @@
                 <h2 class="mb-3">
                     <i class="bi bi-table"></i> Цветки (таблица)
                 </h2>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h3 class="mb-0">Список цветов</h3>
+                    <button @click="addFlower" class="btn btn-success btn-sm">
+                        <i class="bi bi-plus-circle"></i> Добавить цветок
+                    </button>
+                </div>
                 <table class="table table-striped table-hover">
                     <thead class="table-primary">
                         <tr>
@@ -108,10 +135,14 @@
                                 </span>
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-primary me-2" @click="edit(id, flower)" v-if="flower !== null">
-                                    <i class="bi bi-pencil"></i> Редактировать
-                                </button>
-                                <div class="spinner-border spinner-border-sm text-primary" role="status" v-if="flower === null"></div>
+                                <div class="flower-actions">
+                                    <button class="btn btn-sm btn-primary me-2" @click="edit(id, flower)">
+                                        <i class="bi bi-pencil"></i> Редактировать
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" @click="deleteFlower(id)">
+                                        <i class="bi bi-trash"></i> Удалить
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -176,13 +207,21 @@
                 decCounter() {
                     this.counter--;
                 },
+                addFlower() {
+                    const name = prompt("Введите название нового цветка:");
+                    if (name && name.trim()) {
+                        this.flowers.push(name.trim());
+                    }
+                },
+                deleteFlower(id) {
+                    if (confirm(`Удалить цветок "${this.flowers[id]}"?`)) {
+                        this.flowers.splice(id, 1);
+                    }
+                },
                 edit(id, flower) {
-                    let newName = prompt("Введите имя цветка:", flower);
-                    if (newName !== null) {
-                        this.flowers[id] = null;
-                        setTimeout(() => {
-                            this.flowers[id] = newName;
-                        }, 1000);
+                    let newName = prompt("Редактировать цветок:", flower);
+                    if (newName !== null && newName.trim()) {
+                        this.flowers[id] = newName.trim();
                     }
                 },
                 sum() {
