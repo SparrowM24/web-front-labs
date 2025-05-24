@@ -30,12 +30,23 @@
             <div>Телефон: {{user.tel}}</div>
             <hr>
 
-            <h2>Цветы</h2>
-            <ul>
-                <li v-for="(flower, index) in flowers" :key="index">
-                    {{flower}} <button @click="edit(index, flower)">?</button>
-                </li>    
-            </ul>
+            <h2>Цветки</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Редактировать</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(flower, id) in flowers" :key="id">
+                        <td>{{ flower }}</td>
+                        <td>
+                            <button class="btn btn-primary" @click="edit(id, flower)">Редактировать</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <hr>
             
             <h2>Калькулятор</h2>
