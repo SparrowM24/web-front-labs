@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="..\main.css">
+    <link rel="icon" href="..\lab3\favicon-32x32.png" type="image/x-icon">
+    <link rel="icon" href="..\lab3\favicon-16x16.png" type="image/x-icon">
+    <title>Дьячкова Алиса. Лабораторная 7</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0;
+            padding: 0;
+        }
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .current { 
+            display: flex; 
+            justify-content: space-around; 
+            margin: 20px 0; 
+        }
+        .chart { 
+            margin: 30px 0; 
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        НГТУБ ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <h1>Погода в Новосибирске</h1>
+        
+        <div class="current">
+            <div>Температура: <span id="temp">—</span>°C</div>
+            <div>Влажность: <span id="humidity">—</span>%</div>
+        </div>
+        
+        <div class="chart">
+            <h3>Температура</h3>
+            <canvas id="tempChart"></canvas>
+        </div>
+        
+        <div class="chart">
+            <h3>Влажность</h3>
+            <canvas id="humidityChart"></canvas>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Дьячкова Алиса, ФБИ-32, 2 курс, 2025
+    </footer>
+    <script>
+        fetch('https://api.open-meteo.com/v1/forecast?latitude=55.0084&longitude=82.9357&hourly=temperature_2m,relativehumidity_2m&forecast_days=1')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                // Получаем текущий час (0-23)
+                var now = new Date().getHours();
+                document.getElementById('temp').textContent = data.hourly.temperature_2m[now];
+                document.getElementById('humidity').textContent = data.hourly.relativehumidity_2m[now];
+
+                // Формируем подписи для графиков (часы:минуты)
+                var labels = data.hourly.time.map(function(t) {
+                return t.slice(11, 16);
+                }).slice(0, 24);
+
+                new Chart(document.getElementById('tempChart'), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                    label: '°C',
+                    data: data.hourly.temperature_2m.slice(0, 24),
+                    backgroundColor: 'rgba(255, 99, 132, 0.7)'
+                    }]
+                }
+                });
+                
+                new Chart(document.getElementById('humidityChart'), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                    label: '%',
+                    data: data.hourly.relativehumidity_2m.slice(0, 24),
+                    backgroundColor: 'rgba(54, 162, 235, 0.7)'
+                    }]
+                }
+                });
+            });
+    </script>
+</body>
+</html>
